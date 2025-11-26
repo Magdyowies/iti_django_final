@@ -9,7 +9,7 @@ Follow these steps to set up and run the project locally.
 ### 1. Clone the repository (if applicable)
 
 ```bash
-# git clone <repository-url>
+# git clone https://github.com/Magdyowies/iti_django_final/
 # cd crowdfund_console
 ```
 
