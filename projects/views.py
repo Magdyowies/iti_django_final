@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Project
 from .forms import ProjectForm
 from django.shortcuts import render
+from django.contrib import messages
 from datetime import datetime
 
 
@@ -15,14 +16,9 @@ class ProjectListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        date_query = self.request.GET.get('date')
-        if date_query:
-            try:
-                date = datetime.strptime(date_query, '%Y-%m-%d').date()
-                queryset = queryset.filter(start_date__lte=date, end_date__gte=date)
-            except ValueError:
-                # Silently ignore invalid date formats
-                pass
+        project_name_query = self.request.GET.get('project_name')
+        if project_name_query:
+            queryset = queryset.filter(title__icontains=project_name_query)
         return queryset
 
 
@@ -70,3 +66,7 @@ class UserProjectListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Project.objects.filter(owner=self.request.user)
+
+    def handle_no_permission(self):
+        messages.warning(self.request, "You need to log in to view your projects.")
+        return super().handle_no_permission()
