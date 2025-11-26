@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyd
+*.so
+*.egg
+*.egg-info
+.Python
+build/
+dist/
+.env
+
+# Virtual Environment
+.venv/
+env/
+venv/
+/htmlcov/
+
+# Django specific
+*.sqlite3
+media/  # Or wherever you store uploaded files
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+
+# Logs
+*.log
